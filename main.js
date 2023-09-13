@@ -1,6 +1,7 @@
 const boardGrid = document.getElementById('board-grid');
 const signBlueprint = document.createElement('p');
 const winnerDisplay = document.querySelector('h1');
+const playButton = document.getElementById('play-again');
 
 const l1 = document.querySelector('.l1');
 const l2 = document.querySelector('.l2');
@@ -21,10 +22,13 @@ const gameSystem = (function() {
     const player2 = Player('ssmf2', 'O');
     const boardGridChildren = Array.from(boardGrid.children);
     let currentChoice = player1;
+    let roundStartPlayer = currentChoice;
 
     const roundStart = function() {
         boardRestart();
-        winnerDisplay.textContent = 's';
+        winnerDisplay.textContent = 'new game has begun!';
+        roundStartPlayer = (roundStartPlayer == player1) ? player2 : player1;
+        currentChoice = roundStartPlayer;
 
     };
 
@@ -38,9 +42,20 @@ const gameSystem = (function() {
     const picked = function() {
         if (!this.firstChild) {
             if(placeSign(this) == true) {
-                winnerDisplay.textContent = `${currentChoice.name} wins!`
-                
+                endGame(true);
             }
+        };
+    };
+
+    const endGame = function(isThereAWinner) {
+        boardGridChildren.forEach(e => {
+            if (!e.firstChild) {e.appendChild(signBlueprint.cloneNode())};
+        });
+        if (isThereAWinner) {
+            winnerDisplay.textContent = `${currentChoice.name} wins!`
+        }
+        else {
+            winnerDisplay.textContent = `It's a tie!`;
         };
     };
 
@@ -50,12 +65,12 @@ const gameSystem = (function() {
         choice.textContent = currentChoice.sign;
         choice.classList.add('cell');
         if (ifWins() == true) {return true};
-        (currentChoice == player1) ? currentChoice = player2 : currentChoice = player1;
-
+        currentChoice = (currentChoice == player1) ? player2 : player1;
 
     };
 
     const ifWins = function() {
+        //Check if someone have won
         for (groupId in checkCells) {        
             for (cellId in checkCells[groupId]) {
                 let row = checkCells[groupId][cellId];
@@ -63,6 +78,10 @@ const gameSystem = (function() {
                 if (wins == true) {return true};
             }
         }
+        //Check if there is a tie
+        if (ifTie() == true) {
+            endGame(false);
+        };
         return false;
     };
 
@@ -87,11 +106,23 @@ const gameSystem = (function() {
         return match;
     };
 
+    const ifTie = function() {
+        let a = true;
+        boardGridChildren.forEach(e => {
+            if (e.firstChild === null) {a = false};
+        });
+        console.log(a);
+        return a;
+    };
 
+    //button Binder
     (function() {
         boardGridChildren.forEach(element => {
             element.addEventListener('click', picked);
-        })
+        });
+
+        playButton.onclick = () => {roundStart()};
+
     })();
 
 })();
