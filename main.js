@@ -172,7 +172,7 @@ const ModuleFunc = (function() {
         overlay.classList.add('disabled');
         preferencesModule.classList.add('disabled');
         const preferences = new FormData(moduleData.target);
-        gameSystem(preferences.get('player1Name'), preferences.get('player1Sign'), preferences.get('player2Name'), preferences.get('player2Sign'));
+        gameSystem(preferences.get('player1Name'), preferences.get('player1Sign').toUpperCase(), preferences.get('player2Name'), preferences.get('player2Sign').toUpperCase());
 
 
     };
