@@ -1,7 +1,10 @@
 const boardGrid = document.getElementById('board-grid');
 const signBlueprint = document.createElement('p');
-const winnerDisplay = document.querySelector('h1');
+const winnerDisplay = document.getElementById('winner-display');
 const playButton = document.getElementById('play-again');
+
+const player1Stats = document.getElementById('plr1');
+const player2Stats = document.getElementById('plr2');
 
 const l1 = document.querySelector('.l1');
 const l2 = document.querySelector('.l2');
@@ -13,13 +16,22 @@ const t3 = document.querySelector('.t3');
 
 const checkCells = [[l1, l2, l3], [t3], [t1, t2, t3], [l1]];
 
-const Player = function(name, sign) {
-    return {name, sign};
+const Player = function(name, sign, statsElement) {
+    let points = 0;
+
+    const addPoint = function() {
+        points += 1;
+    }
+    
+    const pointsValue = function() {
+        return points;
+    }
+    return {name, sign, statsElement, addPoint, pointsValue};
 }
 
 const gameSystem = (function() {
-    const player1 = Player('blossmd1', 'X');
-    const player2 = Player('ssmf2', 'O');
+    const player1 = Player('blossmd1', 'X', player1Stats);
+    const player2 = Player('ssmf2', 'O', player2Stats);
     const boardGridChildren = Array.from(boardGrid.children);
     let currentChoice = player1;
     let roundStartPlayer = currentChoice;
@@ -27,6 +39,7 @@ const gameSystem = (function() {
     const roundStart = function() {
         boardRestart();
         winnerDisplay.textContent = 'new game has begun!';
+
         roundStartPlayer = (roundStartPlayer == player1) ? player2 : player1;
         currentChoice = roundStartPlayer;
 
@@ -37,12 +50,28 @@ const gameSystem = (function() {
             element.replaceChildren();
         });
 
+        player1Stats.querySelector('#sign').className = '';
+        player2Stats.querySelector('#sign').className = '';
+
+    };
+    const displayPoints = function() {
+        player1Stats.querySelector('#points').textContent = player1.pointsValue();
+        player2Stats.querySelector('#points').textContent = player2.pointsValue();
+    };
+
+    const colorSigns = function() {
+        currentChoice.statsElement.querySelector('#sign').classList.add('winner');
+        let otherChoice = (currentChoice == player1) ? player2 : player1;
+        otherChoice.statsElement.querySelector('#sign').classList.add('loser');
     };
 
     const picked = function() {
         if (!this.firstChild) {
             if(placeSign(this) == true) {
                 endGame(true);
+                currentChoice.addPoint();
+                displayPoints();
+                colorSigns();
             }
         };
     };
