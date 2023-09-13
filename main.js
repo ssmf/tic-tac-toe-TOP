@@ -6,6 +6,10 @@ const playButton = document.getElementById('play-again');
 const player1Stats = document.getElementById('plr1');
 const player2Stats = document.getElementById('plr2');
 
+const preferencesForm = document.getElementById('preferences-form');
+const preferencesModule = document.getElementById('preferences-module');
+const overlay = document.getElementById('overlay');
+
 const l1 = document.querySelector('.l1');
 const l2 = document.querySelector('.l2');
 const l3 = document.querySelector('.l3');
@@ -29,12 +33,20 @@ const Player = function(name, sign, statsElement) {
     return {name, sign, statsElement, addPoint, pointsValue};
 }
 
-const gameSystem = (function() {
-    const player1 = Player('blossmd1', 'X', player1Stats);
-    const player2 = Player('ssmf2', 'O', player2Stats);
+const gameSystem = (function(plr1, plr1Sign, plr2, plr2Sign) {
+    const player1 = Player(plr1, plr1Sign, player1Stats);
+    const player2 = Player(plr2, plr2Sign, player2Stats);
+
     const boardGridChildren = Array.from(boardGrid.children);
     let currentChoice = player1;
     let roundStartPlayer = currentChoice;
+
+    const displayPreferences = (function() {
+        player1Stats.querySelector('#name').textContent = player1.name;
+        player1Stats.querySelector('#sign').textContent = player1.sign;
+        player2Stats.querySelector('#name').textContent = player2.name;
+        player2Stats.querySelector('#sign').textContent = player2.sign;
+    })();
 
     const roundStart = function() {
         boardRestart();
@@ -151,7 +163,17 @@ const gameSystem = (function() {
         });
 
         playButton.onclick = () => {roundStart()};
-
     })();
+});
 
+const ModuleFunc = (function() {
+    preferencesForm.onsubmit = moduleData => {
+        moduleData.preventDefault();
+        overlay.classList.add('disabled');
+        preferencesModule.classList.add('disabled');
+        const preferences = new FormData(moduleData.target);
+        gameSystem(preferences.get('player1Name'), preferences.get('player1Sign'), preferences.get('player2Name'), preferences.get('player2Sign'));
+
+
+    };
 })();

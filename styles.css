@@ -11,6 +11,7 @@ body {
 }
 
 * {
+    transition: all .1s ease-in-out;
     color: white;
     margin: 0;
     font-family: 'Quicksand', 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";;
@@ -186,21 +187,26 @@ h1 {
 .submitBtn:hover {
     border: 2px solid black;
     cursor: pointer;
-    box-shadow: 0px 0px 15px 0px black;
-}
-
-.submitBtn:active {
     background-color: black;
     color: white;
     box-shadow: 0px 0px 20px 0px black;
 }
 
+.playBtn {
+    transition: all .05s;
+}
+
 .playBtn:hover {
     background-color: #90ee90cb;
+    box-shadow: 0px 0px 5px 0px var(--green-color);
     cursor: pointer;
 }
 
 .playBtn:active {
     background-color: var(--green-color);
-    box-shadow: 0px 0px 10px 0px var(--green-color);
+    box-shadow: 0px 0px 15px 0px var(--green-color);
+}
+
+.disabled {
+    display: none;
 }

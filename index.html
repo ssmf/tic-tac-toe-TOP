@@ -14,7 +14,7 @@
     <div class="main">
         <div class="section">
             <div class="playerDisplay" id="plr1">
-                <h1>blossmd1</h1>
+                <h1 id="name">blossmd1</h1>
                 <p>Sign: <span id="sign">X</span></p>
                 <p>points: <span id="points">0</span></p>
             </div>
@@ -34,16 +34,16 @@
                 <button class="btn playBtn" id="play-again">play again</button>
             </div>   
             <div class="playerDisplay" id="plr2">
-                <h1>ssmf2</h1>
+                <h1 id="name">ssmf2</h1>
                 <p>Sign: <span id="sign">O</span></p>
                 <p>points: <span id="points">0</span></p>
             </div>     
         </div>
     </div>
 
-    <div class="gamePrompt">
+    <div class="gamePrompt" id="preferences-module">
         <h1>Please set your preferences:</h1>
-        <form action="" class="formWrapper">
+        <form action="" class="formWrapper" id="preferences-form">
             <div class="formArea">
                 <div class="inputWrapper">
                     <h2>Player1</h2>
@@ -60,7 +60,7 @@
         </form>
     </div>
     
-    <div class="overlay"></div>
+    <div class="overlay" id="overlay"></div>
     
     <script src="main.js"></script>
 </body>
