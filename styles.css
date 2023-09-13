@@ -26,6 +26,45 @@ h1 {
     color: green;
 }
 
+.overlay {
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.gamePrompt > h1 {
+    color: black;
+    font-size: 30px;
+    text-align: center;
+}
+
+.gamePrompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 30%;
+    width: 30%;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0px 0px 20px -5px white;
+    border-radius: 15px;
+    padding: 20px 10px;
+}
+
+.formArea {
+    width: 100%;
+    height: 100%;
+}
+
 .main {
     display: flex;
     justify-content: center;
@@ -41,6 +80,7 @@ h1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 50px;
 }
 
 .playerDisplay p {
@@ -56,7 +96,7 @@ h1 {
     border: 1px solid white;
     border-radius: 15px;
     padding: 50px 25px;
-    width: 10%;
+    width: max(10%, 200px)
 }
 
 .boardSection {
