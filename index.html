@@ -31,7 +31,7 @@
                     <div class="cell"></div>
                     <div class="cell"></div>
                 </div>
-                <button class="btn" id="play-again">play again</button>
+                <button class="btn playBtn" id="play-again">play again</button>
             </div>   
             <div class="playerDisplay" id="plr2">
                 <h1>ssmf2</h1>
@@ -43,8 +43,20 @@
 
     <div class="gamePrompt">
         <h1>Please set your preferences:</h1>
-        <form action="" class="formArea">
-            
+        <form action="" class="formWrapper">
+            <div class="formArea">
+                <div class="inputWrapper">
+                    <h2>Player1</h2>
+                    <input placeholder="Name" required type="text" maxlength="20" minlength="1" name="player1Name">
+                    <input autocapitalize="characters" placeholder="Sign" required type="text" minlength="1" maxlength="1" name="player1Sign">
+                </div>
+                <div class="inputWrapper">
+                    <h2>Player2</h2>
+                    <input placeholder="Name" required type="text" maxlength="20" minlength="1" name="player2Name">
+                    <input autocapitalize="characters" placeholder="Sign" required type="text" minlength="1" maxlength="1" name="player2Sign">
+                </div>
+            </div>
+            <button type="submit" class="btn submitBtn">Start</button>
         </form>
     </div>
     

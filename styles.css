@@ -1,5 +1,6 @@
 :root {
     --green-color: #90ee90;
+    --gray-color:  #D8D8D8;
 }
 
 body {
@@ -37,10 +38,14 @@ h1 {
     z-index: 1;
 }
 
-.gamePrompt > h1 {
+.gamePrompt > h1, .gamePrompt h2 {
     color: black;
     font-size: 30px;
     text-align: center;
+}
+
+.gamePrompt h2 {
+    font-size: 24px;
 }
 
 .gamePrompt {
@@ -51,18 +56,53 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 30%;
-    width: 30%;
     background-color: white;
     z-index: 2;
     box-shadow: 0px 0px 20px -5px white;
     border-radius: 15px;
-    padding: 20px 10px;
+    padding: 30px 60px;
+    gap: 30px;
+}
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }
 
 .formArea {
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 60px;
+}
+
+.inputWrapper {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.inputWrapper > input {
+    transition: all .15s ease-in-out;
+    border: 0;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+
+.inputWrapper > input:focus {
+    outline: solid black thin;
+    box-shadow: 0px 0px 15px -5px black;
 }
 
 .main {
@@ -134,12 +174,33 @@ h1 {
     box-shadow: 0px 0px 10px -5px black;
 }
 
-.btn:hover {
+.submitBtn {
+    position: static;
+    transition: all .1s;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 0px 15px -5px black;
+    border: 2px solid white;
+}
+
+.submitBtn:hover {
+    border: 2px solid black;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 0px black;
+}
+
+.submitBtn:active {
+    background-color: black;
+    color: white;
+    box-shadow: 0px 0px 20px 0px black;
+}
+
+.playBtn:hover {
     background-color: #90ee90cb;
     cursor: pointer;
 }
 
-.btn:active {
+.playBtn:active {
     background-color: var(--green-color);
     box-shadow: 0px 0px 10px 0px var(--green-color);
 }
